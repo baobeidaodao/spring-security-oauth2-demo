@@ -1,2 +1,4 @@
 # Project exclude paths
 /target/
+/spring-security-oauth2-demo.iml
+.idea

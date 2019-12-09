@@ -17,6 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
      * @param username String
      * @return User
      */
-    User findUserByUsername(String username);
+    User findByUsername(String username);
 
 }

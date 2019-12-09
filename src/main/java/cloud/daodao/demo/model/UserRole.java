@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name = "rbac_user_role")
+@Table(schema = "paas_security", name = "rbac_user_role")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler",})
 public class UserRole implements Serializable {
 

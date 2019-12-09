@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,9 +19,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "rbac_role")
+@Table(schema = "paas_security", name = "rbac_role")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler",})
-public class Role implements Serializable {
+public class Role implements GrantedAuthority, Serializable {
 
     @Id
     @Column(name = "id")
@@ -53,12 +54,17 @@ public class Role implements Serializable {
     private List<UserRole> userRoleList;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "role_permission", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "permission_id", referencedColumnName = "id")})
+    @JoinTable(name = "rbac_role_permission", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "permission_id", referencedColumnName = "id")})
     @JsonIgnore
     private List<Permission> permissionList;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roleList")
     @JsonIgnore
     private List<User> userList;
+
+    @Override
+    public String getAuthority() {
+        return code;
+    }
 
 }

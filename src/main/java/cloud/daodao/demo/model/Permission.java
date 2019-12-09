@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "rbac_permission")
+@Table(schema = "paas_security", name = "rbac_permission")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler",})
 public class Permission implements Serializable {
 
